@@ -25,20 +25,24 @@ namespace blockbuster.Models
         public string VideoList()
         {
             string template = "";
-            for (int i = 0; i < Videos.Count; i++)
+            for (int i = 0; i < Rentals.Count; i++)
             {
-                Video video = Videos[i];
-                template += $"{i + 1}. {video.Title} - {video.Rating}";
-                //NOTE check if video is an instance of VHS
-                if (video is VHS)
+                IRentable rental = Rentals[i];
+                if (rental is Video)
+                {
+                    Video video = (Video)rental;
+                    template += $"{i + 1}. {video.Title} - {video.Rating}";
+                    //NOTE check if video is an instance of VHS
+                }
+                if (rental is VHS)
                 {
                     //NOTE convert the video to a vhs and save as a variable
-                    VHS vidoVHS = (VHS)video;
+                    VHS vidoVHS = (VHS)rental;
                     template += " (VHS), rewound: ";
                 }
 
                 //NOTE try to convert to DVD
-                DVD videoDVD = video as DVD;
+                DVD videoDVD = rental as DVD;
                 //NOTE check for success
                 if (videoDVD != null)
                 {
