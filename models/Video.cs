@@ -4,7 +4,7 @@ namespace blockbuster.Models
     {
         public string Title { get; }
         public Rating Rating { get; private set; }
-        public bool CheckedOut { get; private set; }
+        public bool CheckedOut { get; set; }
 
         public Video(string title, Rating rating)
         {

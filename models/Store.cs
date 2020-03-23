@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using blockbuster.Interfaces;
 
 namespace blockbuster.Models
 {
@@ -11,14 +12,14 @@ namespace blockbuster.Models
         public Dictionary<string, List<string>> Merchandise { get; set; }
 
 
-        public void AddVideo(Video newVid)
+        public void AddVideo(IRentable newVid)
         {
-            Videos.Add(newVid);
+            Rentals.Add(newVid);
         }
 
-        public void AddVideo(IEnumerable<Video> videos)
+        public void AddVideo(IEnumerable<IRentable> videos)
         {
-            Videos.AddRange(videos);
+            Rentals.AddRange(videos);
         }
 
         public string VideoList()
