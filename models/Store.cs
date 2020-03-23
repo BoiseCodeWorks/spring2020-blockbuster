@@ -6,21 +6,18 @@ namespace blockbuster.Models
     class Store
     {
         public string Address { get; set; }
-        private List<Video> Videos { get; set; }
+        private List<IRentable> Rentals { get; set; }
 
         public Dictionary<string, List<string>> Merchandise { get; set; }
 
 
         public void AddVideo(Video newVid)
         {
-            // perform some logic for your app
-            System.Console.WriteLine("add one");
             Videos.Add(newVid);
         }
 
         public void AddVideo(IEnumerable<Video> videos)
         {
-            System.Console.WriteLine("add many");
             Videos.AddRange(videos);
         }
 
@@ -29,8 +26,25 @@ namespace blockbuster.Models
             string template = "";
             for (int i = 0; i < Videos.Count; i++)
             {
-                Video current = Videos[i];
-                template += $"{i + 1}. {current.Title} -  {current.Rating} \n";
+                Video video = Videos[i];
+                template += $"{i + 1}. {video.Title} - {video.Rating}";
+                //NOTE check if video is an instance of VHS
+                if (video is VHS)
+                {
+                    //NOTE convert the video to a vhs and save as a variable
+                    VHS vidoVHS = (VHS)video;
+                    template += " (VHS), rewound: ";
+                }
+
+                //NOTE try to convert to DVD
+                DVD videoDVD = video as DVD;
+                //NOTE check for success
+                if (videoDVD != null)
+                {
+                    template += " (DVD), extras: " + videoDVD.Extras;
+                }
+
+                template += "\n";
             }
 
             return template;

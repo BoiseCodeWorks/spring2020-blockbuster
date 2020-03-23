@@ -1,32 +1,27 @@
 namespace blockbuster.Models
 {
-    class Video
+    abstract class Video
     {
-        // NOTE Fields are built automatically for us with auto props below
-        // private string _title;
-        // public string Title
-        // {
-        //     get
-        //     {
-        //         return _title;
-        //     }
-        //     set
-        //     {
-        //         _title = value.ToUpper();
-        //     }
-        // }
-
-
         public string Title { get; }
-        public string Rating { get; private set; }
+        public Rating Rating { get; private set; }
         public bool CheckedOut { get; private set; }
 
-
-        public Video(string title, string rating)
+        public Video(string title, Rating rating)
         {
             Title = title;
             Rating = rating;
             CheckedOut = false;
         }
     }
+
+
+    enum Rating
+    {
+        G,
+        PG,
+        PG13,
+        R,
+        NR
+    }
+
 }
